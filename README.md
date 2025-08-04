@@ -68,7 +68,12 @@ books-fastapi/
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/up2dul/books-fastapi.git
+
+   # or if using ssh
+   git clone git@github.com:up2dul/books-fastapi.git
+
+   # open the project folder
    cd books-fastapi
    ```
 
