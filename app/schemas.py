@@ -9,7 +9,7 @@ class BookBase(BaseModel):
     title: str
     author: str
     year: int
-    genre: Optional[str] = None
+    genre: str = "Unknown"
 
 
 class BookRead(BookBase):
@@ -21,13 +21,12 @@ class BookRead(BookBase):
 class BookCreate(BookBase):
     """Schema for creating a new book."""
 
-    pass
+    id: int
 
 
 class BookUpdate(BaseModel):
     """Schema for updating a book."""
 
-    id: int
     title: Optional[str] = None
     author: Optional[str] = None
     year: Optional[int] = None

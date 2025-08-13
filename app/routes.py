@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlmodel import Session, select
 from starlette.status import (
     HTTP_200_OK,
@@ -71,4 +71,4 @@ def delete_book(book_id: int, db: Session = Depends(get_db_session)):
 
     db.delete(db_book)
     db.commit()
-    return {"message": "Book deleted"}
+    return Response(status_code=HTTP_204_NO_CONTENT)
