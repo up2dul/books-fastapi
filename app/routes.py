@@ -15,7 +15,7 @@ books_router = APIRouter(prefix="/books", tags=["Books"])
 
 # GET /books - DATA 200
 @books_router.get("/", response_model=list[BookRead], status_code=HTTP_200_OK)
-def get_books(db: Session = Depends(get_db_session)):
+def get_books(db: Session = Depends(get_db_session)) -> list[BookRead]:
     """Retrieve all books."""
     books = db.exec(select(Book)).all()
     return books
@@ -23,7 +23,7 @@ def get_books(db: Session = Depends(get_db_session)):
 
 # GET /books/{book_id} - DATA 200
 @books_router.get("/{book_id}", response_model=BookRead, status_code=HTTP_200_OK)
-def get_book(book_id: int, db: Session = Depends(get_db_session)):
+def get_book(book_id: int, db: Session = Depends(get_db_session)) -> BookRead:
     """Retrieve a book by its ID."""
     db_book = db.get(Book, book_id)
     if not db_book:
@@ -33,7 +33,9 @@ def get_book(book_id: int, db: Session = Depends(get_db_session)):
 
 # PUT /books/{book_id} - DATA 200
 @books_router.put("/{book_id}", response_model=BookRead, status_code=HTTP_200_OK)
-def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_db_session)):
+def update_book(
+    book_id: int, book: BookUpdate, db: Session = Depends(get_db_session)
+) -> BookRead:
     """Update a book by its ID."""
     db_book = db.get(Book, book_id)
     if not db_book:
@@ -50,7 +52,7 @@ def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_db_ses
 
 # POST /books - DATA 201
 @books_router.post("/", response_model=BookCreate, status_code=HTTP_201_CREATED)
-def create_book(book: BookCreate, db: Session = Depends(get_db_session)):
+def create_book(book: BookCreate, db: Session = Depends(get_db_session)) -> Book:
     """Create a new book."""
     new_book = Book(
         title=book.title, author=book.author, year=book.year, genre=book.genre
@@ -63,7 +65,7 @@ def create_book(book: BookCreate, db: Session = Depends(get_db_session)):
 
 # DELETE /books/{book_id} - 204
 @books_router.delete("/{book_id}", status_code=HTTP_204_NO_CONTENT)
-def delete_book(book_id: int, db: Session = Depends(get_db_session)):
+def delete_book(book_id: int, db: Session = Depends(get_db_session)) -> None:
     """Delete a book by its ID."""
     db_book = db.get(Book, book_id)
     if not db_book:
