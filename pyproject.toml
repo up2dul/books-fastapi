@@ -1,14 +1,17 @@
 [project]
 name = "books-fastapi"
 version = "0.1.0"
-description = "Add your description here"
+description = "A FastAPI app for managing books."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16.4",
     "fastapi[standard]>=0.116.1",
+    "fastmcp==2.12.3",
+    "mcp[cli]>=1.14.0",
     "pydantic>=2.11.7",
     "python-dotenv>=1.1.1",
+    "requests>=2.32.5",
     "ruff>=0.12.7",
     "scalar-fastapi>=1.2.3",
     "sqlmodel>=0.0.24",
