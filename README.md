@@ -50,7 +50,7 @@ books-fastapi/
 │   ├── env.py
 │   └── versions/
 ├── alembic.ini         # Alembic configuration
-├── books_mcp.py             # Model Context Protocol server
+├── books_mcp.py       # Model Context Protocol server
 ├── pyproject.toml      # Project dependencies and configuration
 ├── uv.lock            # Lock file for dependencies
 ├── Dockerfile         # Docker container configuration
@@ -189,10 +189,10 @@ This project includes an MCP server that provides AI assistants with tools to in
    ```bash
    make mcp
    # or
-   source .venv/bin/activate && fastmcp run books_mcp.py
+   uv run books_mcp.py
    ```
 
-The MCP server will be available for AI assistants to connect and interact with your books database through the defined tools.
+The MCP server will run on port 8001 and will be available for AI assistants to connect and interact with your books database through the defined tools.
 
 ## 🔧 Development Commands
 
