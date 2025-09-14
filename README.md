@@ -8,6 +8,7 @@ A simple and elegant RESTful API for managing a books collection, built with **F
 - 📊 **SQLite** - Lightweight, file-based database
 - 🗃️ **SQLModel** - SQL databases in Python, designed for simplicity and type safety
 - 📖 **Automatic API Documentation** - Interactive docs with Scalar UI
+- 🤖 **MCP Integration** - Model Context Protocol server for AI assistant integration
 - 🐳 **Docker** - Containerized deployment
 - 🗄️ **Alembic** - Database migration management
 - 🎨 **UV** - Fast Python package manager
@@ -49,6 +50,7 @@ books-fastapi/
 │   ├── env.py
 │   └── versions/
 ├── alembic.ini         # Alembic configuration
+├── books_mcp.py             # Model Context Protocol server
 ├── pyproject.toml      # Project dependencies and configuration
 ├── uv.lock            # Lock file for dependencies
 ├── Dockerfile         # Docker container configuration
@@ -166,11 +168,40 @@ curl -X DELETE "http://localhost:8000/books/1"
 | year | Integer | Yes | Publication year |
 | genre | String | No | Book genre |
 
+## 🤖 Model Context Protocol (MCP) Integration
+
+This project includes an MCP server that provides AI assistants with tools to interact with the Books API. The MCP server exposes the following tools:
+
+- `get_books()` - Retrieve all books
+- `get_book(book_id)` - Get a specific book by ID
+- `create_book(title, author, year, genre)` - Create a new book
+- `update_book(book_id, title, author, year, genre)` - Update an existing book
+- `delete_book(book_id)` - Delete a book by ID
+
+### Running the MCP Server
+
+1. **Start the FastAPI server first**
+   ```bash
+   make dev
+   ```
+
+2. **In a separate terminal, start the MCP server**
+   ```bash
+   make mcp
+   # or
+   source .venv/bin/activate && fastmcp run books_mcp.py
+   ```
+
+The MCP server will be available for AI assistants to connect and interact with your books database through the defined tools.
+
 ## 🔧 Development Commands
 
 ```bash
 # Start development server with auto-reload
 make dev
+
+# Start MCP server (requires API server to be running)
+make mcp
 
 # Format code and fix linting issues
 make format
@@ -195,6 +226,7 @@ This project demonstrates:
 - **Migration Management**: Handling database schema changes with Alembic
 - **Modern Python**: Type hints, Pydantic models, and async/await patterns
 - **API Design**: RESTful principles and HTTP status codes
+- **MCP Integration**: Creating Model Context Protocol servers for AI assistant integration
 - **Containerization**: Docker best practices for Python applications
 - **Development Workflow**: Code formatting, linting, and development automation
 
