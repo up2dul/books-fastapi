@@ -1,5 +1,10 @@
+SHELL := /bin/bash
+
 dev:
 	uv run uvicorn app.main:app --reload
+
+mcp:
+	uv run books_mcp.py
 
 format:
 	uv run ruff format
